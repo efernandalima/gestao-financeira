@@ -1,5 +1,6 @@
-package br.com.financeiro.model;
+package br.com.financeiro.transacao.model;
 
+import br.com.financeiro.categoria.model.Categoria;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.DecimalMin;
 import jakarta.validation.constraints.NotBlank;

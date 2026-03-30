@@ -1,5 +1,6 @@
-package br.com.financeiro.model;
+package br.com.financeiro.categoria.model;
 
+import br.com.financeiro.transacao.model.TipoTransacao;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
 import lombok.AllArgsConstructor;

@@ -1,12 +1,16 @@
-package br.com.financeiro.controller;
+package br.com.financeiro.transacao;
 
-import br.com.financeiro.model.TipoTransacao;
-import br.com.financeiro.model.Transacao;
-import br.com.financeiro.service.TransacaoService;
+import br.com.financeiro.dto.TransacaoRequestDTO;
+import br.com.financeiro.dto.TransacaoResponseDTO;
+import br.com.financeiro.transacao.model.TipoTransacao;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -25,47 +29,49 @@ public class TransacaoController {
     private final TransacaoService transacaoService;
 
     @GetMapping
-    @Operation(summary = "Listar todas as transações")
-    public ResponseEntity<List<Transacao>> listarTodas() {
-        return ResponseEntity.ok(transacaoService.listarTodas());
+    @Operation(summary = "Listar transações paginadas")
+    public ResponseEntity<Page<TransacaoResponseDTO>> listarTodas(
+            @PageableDefault(size = 10, sort = "data", direction = Sort.Direction.DESC)
+            Pageable pageable) {
+        return ResponseEntity.ok(transacaoService.listarTodasPaginadoDTO(pageable));
     }
 
     @GetMapping("/{id}")
     @Operation(summary = "Buscar transação por ID")
-    public ResponseEntity<Transacao> buscarPorId(@PathVariable Long id) {
-        return ResponseEntity.ok(transacaoService.buscarPorId(id));
+    public ResponseEntity<TransacaoResponseDTO> buscarPorId(@PathVariable Long id) {
+        return ResponseEntity.ok(transacaoService.buscarPorIdDTO(id));
     }
 
     @GetMapping("/tipo/{tipo}")
     @Operation(summary = "Listar transações por tipo")
-    public ResponseEntity<List<Transacao>> listarPorTipo(
+    public ResponseEntity<List<TransacaoResponseDTO>> listarPorTipo(
             @PathVariable TipoTransacao tipo) {
-        return ResponseEntity.ok(transacaoService.listarPorTipo(tipo));
+        return ResponseEntity.ok(transacaoService.listarPorTipoDTO(tipo));
     }
 
     @GetMapping("/periodo")
     @Operation(summary = "Listar transações por período")
-    public ResponseEntity<List<Transacao>> listarPorPeriodo(
+    public ResponseEntity<List<TransacaoResponseDTO>> listarPorPeriodo(
             @RequestParam @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate inicio,
             @RequestParam @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate fim) {
-        return ResponseEntity.ok(transacaoService.listarPorPeriodo(inicio, fim));
+        return ResponseEntity.ok(transacaoService.listarPorPeriodoDTO(inicio, fim));
     }
 
     @GetMapping("/categoria/{categoriaId}")
     @Operation(summary = "Listar transações por categoria")
-    public ResponseEntity<List<Transacao>> listarPorCategoria(
+    public ResponseEntity<List<TransacaoResponseDTO>> listarPorCategoria(
             @PathVariable Long categoriaId) {
-        return ResponseEntity.ok(transacaoService.listarPorCategoria(categoriaId));
+        return ResponseEntity.ok(transacaoService.listarPorCategoriaDTO(categoriaId));
     }
 
     @GetMapping("/tipo/{tipo}/periodo")
     @Operation(summary = "Listar transações por tipo e período")
-    public ResponseEntity<List<Transacao>> listarPorTipoEPeriodo(
+    public ResponseEntity<List<TransacaoResponseDTO>> listarPorTipoEPeriodo(
             @PathVariable TipoTransacao tipo,
             @RequestParam @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate inicio,
             @RequestParam @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate fim) {
         return ResponseEntity.ok(
-                transacaoService.listarPorTipoEPeriodo(tipo, inicio, fim));
+                transacaoService.listarPorTipoEPeriodoDTO(tipo, inicio, fim));
     }
 
     @GetMapping("/total/{tipo}")
@@ -88,17 +94,18 @@ public class TransacaoController {
 
     @PostMapping
     @Operation(summary = "Criar nova transação")
-    public ResponseEntity<Transacao> criar(@Valid @RequestBody Transacao transacao) {
+    public ResponseEntity<TransacaoResponseDTO> criar(
+            @Valid @RequestBody TransacaoRequestDTO dto) {
         return ResponseEntity.status(HttpStatus.CREATED)
-                .body(transacaoService.criar(transacao));
+                .body(transacaoService.criarDTO(dto));
     }
 
     @PutMapping("/{id}")
     @Operation(summary = "Atualizar transação")
-    public ResponseEntity<Transacao> atualizar(
+    public ResponseEntity<TransacaoResponseDTO> atualizar(
             @PathVariable Long id,
-            @Valid @RequestBody Transacao transacao) {
-        return ResponseEntity.ok(transacaoService.atualizar(id, transacao));
+            @Valid @RequestBody TransacaoRequestDTO dto) {
+        return ResponseEntity.ok(transacaoService.atualizarDTO(id, dto));
     }
 
     @DeleteMapping("/{id}")

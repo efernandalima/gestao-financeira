@@ -1,6 +1,5 @@
-package br.com.financeiro.controller;
+package br.com.financeiro.relatorio;
 
-import br.com.financeiro.service.RelatorioService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;

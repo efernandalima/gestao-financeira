@@ -1,7 +1,7 @@
-package br.com.financeiro.repository;
+package br.com.financeiro.transacao;
 
-import br.com.financeiro.model.Transacao;
-import br.com.financeiro.model.TipoTransacao;
+import br.com.financeiro.transacao.model.Transacao;
+import br.com.financeiro.transacao.model.TipoTransacao;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;

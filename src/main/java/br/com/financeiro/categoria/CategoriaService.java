@@ -1,9 +1,8 @@
-package br.com.financeiro.service;
+package br.com.financeiro.categoria;
 
-import br.com.financeiro.exception.ResourceNotFoundException;
-import br.com.financeiro.model.Categoria;
-import br.com.financeiro.model.TipoTransacao;
-import br.com.financeiro.repository.CategoriaRepository;
+import br.com.financeiro.categoria.model.Categoria;
+import br.com.financeiro.shared.exception.ResourceNotFoundException;
+import br.com.financeiro.transacao.model.TipoTransacao;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;

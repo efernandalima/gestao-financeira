@@ -1,8 +1,7 @@
-package br.com.financeiro.controller;
+package br.com.financeiro.categoria;
 
-import br.com.financeiro.model.Categoria;
-import br.com.financeiro.model.TipoTransacao;
-import br.com.financeiro.service.CategoriaService;
+import br.com.financeiro.categoria.model.Categoria;
+import br.com.financeiro.transacao.model.TipoTransacao;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;

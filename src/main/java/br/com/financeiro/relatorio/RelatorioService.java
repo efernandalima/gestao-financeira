@@ -1,9 +1,8 @@
-package br.com.financeiro.service;
+package br.com.financeiro.relatorio;
 
-import br.com.financeiro.model.TipoTransacao;
-import br.com.financeiro.repository.TransacaoRepository;
+import br.com.financeiro.transacao.model.TipoTransacao;
+import br.com.financeiro.transacao.TransacaoService;
 import lombok.RequiredArgsConstructor;
-import org.springframework.cglib.core.Local;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 

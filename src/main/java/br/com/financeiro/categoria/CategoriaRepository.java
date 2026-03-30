@@ -1,7 +1,7 @@
-package br.com.financeiro.repository;
+package br.com.financeiro.categoria;
 
-import br.com.financeiro.model.Categoria;
-import br.com.financeiro.model.TipoTransacao;
+import br.com.financeiro.categoria.model.Categoria;
+import br.com.financeiro.transacao.model.TipoTransacao;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
